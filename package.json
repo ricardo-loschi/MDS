@@ -1,0 +1,115 @@
+{
+  "name": "MDS",
+  "displayName": "MaxDevScript",
+  "description": "Maximo Developer Script",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+   "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [{
+      "command": "MDS.helloWorld",
+      "title": "Hello World MDS"
+    }]
+  },
+  "configuration": {
+      "type": "object",
+      "title": "Maximo Developer Script configuration",
+      "properties": {
+        "MDS.serverSettings.hostname": {
+          "type": "string",
+          "default": null,
+          "description": "Hostname / IP of Maximo server (e.g. 10.10.12.12 or www.xyz.com)"
+        },
+        "MDS.serverSettings.port": {
+          "type": "number",
+          "description": "Maximo port"
+        },
+        "MDS.authentication.username": {
+          "type": "string",
+          "default": "maxadmin",
+          "description": "Username for Maximo Authentication"
+        },
+        "MDS.authentication.password": {
+          "type": "string",
+          "default": "maxadmin",
+          "description": "Password for Maximo Authentication"
+        },
+        "MDS.authentication.authenticationType": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "ldap"
+          ],
+          "enumDescriptions": [
+            "Maximo's internal authentication",
+            "LDAP based authentication using applciation server"
+          ],
+          "default": "internal",
+          "description": "Type of Authentication"
+        },
+        "MDS.serverSettings.objectStructure": {
+          "type": "string",
+          "default": "MXAPIAUTOSCRIPT",
+          "description": "Object Structure to be used scripts uploading / downloading"
+        },
+        "MDS.serverSettings.httpProtocol": {
+          "type": "string",
+          "enum": [
+            "http",
+            "https"
+          ],
+          "enumDescriptions": [
+            "Http",
+            "Https Secure Protocol"
+          ],
+          "default": "http",
+          "description": "Http protocol (http or https)"
+        },
+        "MDS.scriptSettings.createPythonFileForJythonScripts": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Create Jython script in Maximo even if the file in editor is .py"
+        },
+        "mxscript.scriptSettings.logLevel": {
+          "enum": [
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "ERROR",
+            "FATAL"
+          ],
+          "enumDescriptions": [
+            "Logs messages that are useful in debugging",
+            "Logs informational messages",
+            "Logs messages indicating harmful situations in functionality",
+            "Logs message indicating errors in application functionality",
+            "Logs very severe errors messages"
+          ],
+          "type": "string",
+          "description": "The log level tp set with scripts when creating / updating them. Leave empty to leave them as it is"
+        }
+      }
+    },  
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5",
+    "@vscode/test-electron": "^2.2.3"
+  }
+}
