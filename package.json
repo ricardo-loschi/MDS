@@ -7,6 +7,10 @@
     "vscode": "^1.75.0"
   },
   "publisher": "vscodemds",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ricardo-loschi/MDS.git"
+  },  
    "categories": [
     "Other"
   ],
