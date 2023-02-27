@@ -6,6 +6,7 @@
   "engines": {
     "vscode": "^1.75.0"
   },
+  "publisher": "vscodemds",
    "categories": [
     "Other"
   ],
@@ -76,7 +77,7 @@
           "default": true,
           "markdownDescription": "Create Jython script in Maximo even if the file in editor is .py"
         },
-        "mxscript.scriptSettings.logLevel": {
+        "MDS.scriptSettings.logLevel": {
           "enum": [
             "DEBUG",
             "INFO",
