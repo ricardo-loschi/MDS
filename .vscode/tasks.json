@@ -1,0 +1,1098 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            "maximo_developer_script": "${env:MDS_HOME}",
+            "dir_script": "scriptmaxinst"
+        }
+    },
+    "tasks": [
+        {
+            "label": "Gerar merge DBC",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/junta_dbc.py",
+                    "-d",
+                    "${fileDirname}/dbc"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/junta_dbc.py",
+                    "-d",
+                    "${fileDirname}/dbc"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\junta_dbc.py",
+                    "-d",
+                    "${fileDirname}\\dbc"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Gerar novo Ticket",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/criar_template.py",
+                    "-sr",
+                    "${input:folderName}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "${maximo_developer_script}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/criar_template.py",
+                    "-sr",
+                    "${input:folderName}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "${maximo_developer_script}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\criar_template.py",
+                    "-sr",
+                    "${input:folderName}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "%maximo_developer_script%"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Gerar DBC com Jythons",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_jython_V2.py",
+                    "-d",
+                    "${fileDirname}/jython",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_jython_V2.py",
+                    "-d",
+                    "${fileDirname}/jython",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\create_DBC_jython_V2.py",
+                    "-d",
+                    "${fileDirname}/jython",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "runscriptfile",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/runscriptfile_vscode.sh",
+                "args": [
+                    "${fileBasename}",
+                    "${file}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${dir_script}",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/runscriptfile_vscode.sh",
+                "args": [
+                    "${fileBasename}",
+                    "${file}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${dir_script}",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\runscriptfile_vscode.bat",
+                "args": [
+                    "${fileBasename}",
+                    "${file}",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "%dir_script%",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "mxdiff",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/mxdiff_vscode.sh",
+                "args": [
+                    "${fileDirname}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${relativeFile}"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/mxdiff_vscode.sh",
+                "args": [
+                    "${fileDirname}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${relativeFile}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\mxdiff_vscode.bat",
+                "args": [
+                    "${fileDirname}",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${relativeFile}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "UploadScriptJython",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/uploadscript.py",
+                    "-j",
+                    "${file}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/uploadscript.py",
+                    "-j",
+                    "${file}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\uploadscript.py",
+                    "-j",
+                    "${file}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair Workflow",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/extractwf_vscode.sh",
+                "args": [
+                    "${input:folderName}",
+                    "${workspaceFolder}/${input:folderName}/dbc",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/extractwf_vscode.sh",
+                "args": [
+                    "${input:folderName}",
+                    "${workspaceFolder}/${input:folderName}/dbc",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\extractwf_vscode.bat",
+                "args": [
+                    "${input:folderName}",
+                    "${workspaceFolder}\\${input:folderName}\\dbc",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${workspaceFolder}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair Escalação",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/extractescalation_vscode.sh",
+                "args": [
+                    "${input:folderName}",
+                    "${workspaceFolder}/${input:folderName}/dbc",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/extractescalation_vscode.sh",
+                "args": [
+                    "${relativeFileDirname}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}",
+                    "${input:escalationname}",
+                    "${input:selectdb}",
+                    "${input:gendelete}",
+                    "${workspaceFolder}/${relativeFileDirname}/dbc",
+                    "${relativeFile}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\extractwf_vscode.bat",
+                "args": [
+                    "${input:folderName}",
+                    "${workspaceFolder}\\${input:folderName}\\dbc",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${workspaceFolder}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },        
+        {
+            "label": "Gerar Pacote (zip)",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/gera_patch_vscode.sh",
+                "args": [
+                    "${fileDirname}",
+                    "${relativeFileDirname}",
+                    "${workspaceFolder}",
+                    "${maximo_developer_script}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${relativeFile}",
+                    "${input:versao}",
+                    "${input:jythons}",
+                    "${input:mxs}",
+                    "${input:gendoc}"                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/gera_patch_vscode.sh",
+                "args": [
+                    "${fileDirname}",
+                    "${relativeFileDirname}",
+                    "${workspaceFolder}",
+                    "${maximo_developer_script}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${relativeFile}",
+                    "${input:versao}",
+                    "${input:jythons}",
+                    "${input:mxs}",
+                    "${input:gendoc}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\gera_patch_vscode.bat",
+                "args": [
+                    "${fileDirname}",
+                    "${relativeFileDirname}",
+                    "${workspaceFolder}",
+                    "%maximo_developer_script%",
+                    "${relativeFile}",
+                    "${input:versao}",
+                    "${input:jythons}",
+                    "${input:mxs}",
+                    "${input:gendoc}"                    
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair assinatura avançada",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_CTRLGROUP_V2.py",
+                    "-q",
+                    "${input:query}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_CTRLGROUP_V2.py",
+                    "-q",
+                    "${input:query}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\create_DBC_CTRLGROUP_V2.py",
+                    "-q",
+                    "${input:query}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Gerar Documento Tecnico",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/criar_documento.py",
+                    "-d",
+                    "${fileDirname}/dbc",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "${maximo_developer_script}"                    
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/criar_documento.py",
+                    "-d",
+                    "${fileDirname}/dbc",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "${maximo_developer_script}"                    
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\criar_documento.py",
+                    "-d",
+                    "${fileDirname}\\dbc",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${workspaceFolder}",
+                    "-mds",
+                    "%maximo_developer_script%"                    
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair Relat\u00f3rio",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/reports_vscode.sh",
+                "args": [
+                    "${input:folderName}",
+                    "${input:appName}",
+                    "${input:fileName}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}",
+                    "extract"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/reports_vscode.sh",
+                "args": [
+                    "${input:folderName}",
+                    "${input:appName}",
+                    "${input:fileName}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}",
+                    "extract"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\reports_vscode.bat",
+                "args": [
+                    "${input:folderName}",
+                    "${input:appName}",
+                    "${input:fileName}",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${workspaceFolder}",
+                    "extract"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Importar Relat\u00f3rio",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/reports_vscode.sh",
+                "args": [
+                    "${relativeFileDirname}",
+                    "${relativeFileDirname}",
+                    "${fileBasename}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}",
+                    "import"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/reports_vscode.sh",
+                "args": [
+                    "${relativeFileDirname}",
+                    "${relativeFileDirname}",
+                    "${fileBasename}",
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${workspaceFolder}",
+                    "import"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\reports_vscode.bat",
+                "args": [
+                    "${relativeFileDirname}",
+                    "${relativeFileDirname}",
+                    "${fileBasename}",
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${workspaceFolder}",
+                    "import"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair Start Center",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_STARTCENTER.py",
+                    "-q",
+                    "${input:querySC}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}",
+                    "-nt",
+                    "${input:NewTemp}",
+                    "-g",
+                    "${input:Groups}"                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_STARTCENTER.py",
+                    "-q",
+                    "${input:querySC}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}",
+                    "-nt",
+                    "${input:NewTemp}",
+                    "-g",
+                    "${input:Groups}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\create_DBC_STARTCENTER.py",
+                    "-q",
+                    "${input:querySC}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}",
+                    "-nt",
+                    "${input:NewTemp}",
+                    "-g",
+                    "${input:Groups}"                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Aplicar mxs (mxapply)",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/mxapply_vscode.sh",
+                "args": [
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${file}"
+                ]
+            },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/mxapply_vscode.sh",
+                "args": [
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${file}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\mxapply_vscode.bat",
+                "args": [
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${file}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "teste",
+            "type": "shell",
+            "osx": {
+                "command": "echo",
+                "args": [
+                    "${maximo_developer_script}/maximo76_dev",
+                    "${file}"
+                ]
+            },
+            "linux": {
+                "command": "echo",
+                "args": [
+                    "${config:MDS.serverSettings.hostname}"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%\\bat\\mxapply_vscode.bat",
+                "args": [
+                    "%maximo_developer_script%\\maximo76_dev",
+                    "${file}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },        
+        {
+            "label": "Download Automation Script",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/import_jython.py",
+                    "-sn",
+                    "${input:fileNamePy}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/import_jython.py",
+                    "-sn",
+                    "${input:fileNamePy}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\import_jython.py",
+                    "-sn",
+                    "${input:fileNamePy}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair Objetos MIF",
+            "type": "shell",
+            "osx": {
+                "command": "${maximo_developer_script}/sh/extractmif_vscode.sh",
+                "args": [
+                    "${input:selectdb}",
+                    "${relativeFileDirname}",
+                    "${input:gendelete}",
+                    "${input:artefato}",
+                    "${input:identifier}",
+                    "${workspaceFolder}",
+                    "${maximo_developer_script}/maximo76_dev"
+                    ]            
+                },
+            "linux": {
+                "command": "${maximo_developer_script}/sh/extractmif_vscode.sh",
+                "args": [
+                    "${input:selectdb}",
+                    "${relativeFileDirname}",
+                    "${input:gendelete}",
+                    "${input:artefato}",
+                    "${input:identifier}",
+                    "${workspaceFolder}",
+                    "${maximo_developer_script}/maximo76_dev"
+                ]
+            },
+            "windows": {
+                "command": "%maximo_developer_script%/bat/extractmif_vscode.bat",
+                "args": [
+                    "${input:selectdb}",
+                    "${relativeFileDirname}",
+                    "${input:gendelete}",
+                    "${input:artefato}",
+                    "${input:identifier}",
+                    "${workspaceFolder}",
+                    "%maximo_developer_script%\\maximo76_dev"
+                ]            
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Executar pacote (windows)",
+            "type": "shell",
+            "osx": {
+                "command": "xfreerdp",
+                "args": [
+                    "/v:br-ebe-maxadmdes.ds55.local",
+                    "/u:FS5997",
+                    "/p:Janeiro@31012022",
+                    "/d:D92",
+                    "/drive:pacote,${workspaceFolder}",
+                    "/admin",
+                    "/app:'c:\\temp\\exec_patch.bat'",
+                    "/app-cmd:'${relativeFileDirname}'",
+                    ]            
+                },
+            "linux": {
+                "command": "xfreerdp",
+                "args": [
+                    "/admin",
+                    "/v:br-ebe-maxadmdes.ds55.local",
+                    "/u:FS5997",
+                    "/p:Janeiro@30012023",
+                    "/d:D92",
+                    "/drive:pacote,${workspaceFolder}",
+                    "/app:'d:\\install\\exec_patch.bat'",
+                    "/app-cmd:'${relativeFileDirname}' '${input:versaopacote}'",
+                    ]            
+                },
+            "windows": {
+                "command": "winrs",
+                "args": [
+                    "/r:br-ebe-maxadmdes.ds55.local",
+                    "/u:FS5997",
+                    "/p:Janeiro@30012023",
+                    "/d:D92",
+                    "/drive:pacote,${workspaceFolder}",
+                    "/admin",
+                    "/app:'c:\\temp\\exec_patch.bat'",
+                    "/app-cmd:'${relativeFileDirname}'",
+                    ]            
+                },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Executar pacote (docker local)",
+            "type": "shell",
+            "osx": {
+                "command": "xfreerdp",
+                "args": [
+                    "/v:br-ebe-maxadmdes.ds55.local",
+                    "/u:FS5997",
+                    "/p:Janeiro@31012022",
+                    "/d:D92",
+                    "/drive:pacote,${workspaceFolder}",
+                    "/admin",
+                    "/app:'c:\\temp\\exec_patch.bat'",
+                    "/app-cmd:'${relativeFileDirname}'",
+                    ]            
+                },
+            "linux": {
+                "command": "docker",
+                "args": [
+                    "cp",
+                    "${workspaceFolder}/${relativeFileDirname}/pacote/${relativeFileDirname}-MX76-Instalacao_de_Pacote-${input:versaopacote}.zip",
+                    "console:/work",
+                    "&&",
+                    "docker",
+                    "exec",
+                    "-it",
+                    "console",
+                    "mkdir",
+                    "-p",
+                    "${relativeFileDirname}-MX76-Instalacao_de_Pacote-${input:versaopacote}",
+                    "&&",
+                    "docker",
+                    "exec",
+                    "-it",
+                    "console",
+                    "unzip",
+                    "${relativeFileDirname}-MX76-Instalacao_de_Pacote-${input:versaopacote}.zip",
+                    "-d",
+                    "${relativeFileDirname}-MX76-Instalacao_de_Pacote-${input:versaopacote}",
+                    "&&",
+                    "docker",
+                    "exec",
+                    "-it",
+                    "-w",
+                    "/work/${relativeFileDirname}-MX76-Instalacao_de_Pacote-${input:versaopacote}",
+                    "console",
+                    "./InstallPatch.sh"
+                    ]            
+            },
+            "windows": {
+                "command": "winrs",
+                "args": [
+                    "/r:br-ebe-maxadmdes.ds55.local",
+                    "/u:FS5997",
+                    "/p:Janeiro@30012023",
+                    "/d:D92",
+                    "/drive:pacote,${workspaceFolder}",
+                    "/admin",
+                    "/app:'c:\\temp\\exec_patch.bat'",
+                    "/app-cmd:'${relativeFileDirname}'",
+                    ]            
+                },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair XML de tela",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/get_presentation.py",
+                    "-app",
+                    "${input:appName}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/get_presentation.py",
+                    "-app",
+                    "${input:appName}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\get_presentation.py",
+                    "-app",
+                    "${input:appName}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extrair DOMINIOS",
+            "type": "shell",
+            "osx": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_DOMAIN.py",
+                    "-q",
+                    "${input:dominio}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "linux": {
+                "command": "python3",
+                "args": [
+                    "${maximo_developer_script}/python/create_DBC_DOMAIN.py",
+                    "-q",
+                    "${input:dominio}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "windows": {
+                "command": "py",
+                "args": [
+                    "%maximo_developer_script%\\python\\create_DBC_DOMAIN.py",
+                    "-q",
+                    "${input:dominio}",
+                    "-sr",
+                    "${relativeFileDirname}",
+                    "-w",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "folderName",
+            "description": "Informe o nome da Pasta do Ticket de trabalho",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "fileName",
+            "description": "Informe o nome do Arquivo",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "query",
+            "description": "Informe o nome da assinatura que se deseja extrair as propriedades avançadas. Caso tenha mais de uma favor separar por vírgula. (ex.: TBLE_OPERA,TBLE_FMEA)",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "dominio",
+            "description": "Informe o nome do domínio a ser extraído. Caso tenha mais de um dominio separe os mesmo por virgula.",
+            "default": ""
+        },        
+        {
+            "type": "promptString",
+            "id": "appName",
+            "description": "Informe o nome da Aplica\u00e7\u00e3o",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "querySC",
+            "description": "Informe o nome do Template para extrair, sem aspas simples. (Ex.: name:Template-20200507140430)",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "NewTemp",
+            "description": "O Template que ir\u00e1 extrair j\u00e1 existe no ambiente de destino? [s/n]",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "Groups",
+            "description": "Se sim, d\u00ea Enter. Se n\u00e3o, insira os Grupos de Segurna\u00e7a para esse Start Center. (Ex.:'GRUPO1','GRUPO2')",
+            "default": " "
+        },
+        {
+            "type": "promptString",
+            "id": "fileNamePy",
+            "description": "Informe o nome do Arquivo jython a ser importado ou <ENTER> para todos os arquivos",
+            "default": ""
+        },
+        {
+            "type": "pickString",
+            "id": "selectdb",
+            "description": "Entre com o banco de dados (ORACLE or MSSQL)",
+            "options": [
+                "ORACLE",
+                "MSSQL"
+            ],
+            "default": "ORACLE"
+        },
+        {
+            "type": "pickString",
+            "id": "gendelete",
+            "description": "Criar script com instrucoes de delete? (Sim/Nao)",
+            "options": [
+                "Sim",
+                "Nao"
+            ],
+            "default": "Sim"
+        },
+        {
+            "type": "pickString",
+            "id": "artefato",
+            "description": "Qual artefato deseja extrair",
+            "options": [
+                "Object Structure",
+                "End Point",
+                "Web Service",
+                "Enterprise Service",
+                "External System",
+                "Publish Channel",
+                "ALL",
+                "Invocation Channel",
+                "OSLC Resources",
+                "JSON Resources"
+            ],
+            "default": "Object Structure"
+        },
+        {
+            "type": "promptString",
+            "id": "identifier",
+            "description": "Informe a chave que deve ser pesquisada para extrair o artefato. Ex: MXWO",
+            "default": ""
+        },
+        {
+            "type": "promptString",
+            "id": "versao",
+            "description": "Versao do pacote a ser gerada [ex: V001]",
+            "default": "V001"
+        },
+        {
+            "type": "promptString",
+            "id": "escalationname",
+            "description": "Digite o nome da escalação"
+        },
+        {
+            "type": "pickString",
+            "id": "jythons",
+            "description": "Deseja gerar DBC com informações dos scripts de automacao jython? [Sim/Nao]",
+            "options": [
+                "Sim",
+                "Nao"
+            ],
+            "default": "Sim"            
+        },        
+        {
+            "type": "pickString",
+            "id": "mxs",
+            "description": "Deseja gerar arquivos mxs com diferença de tela? [Sim/Nao]",
+            "options": [
+                "Sim",
+                "Nao"
+            ],
+            "default": "Sim"
+        },        
+        {
+            "type": "pickString",
+            "id": "gendoc",
+            "description": "Deseja gerar documento tecnico com informacao dos DBC? [Sim/Nao]",
+            "options": [
+                "Sim",
+                "Nao"
+            ],
+            "default": "Sim"
+        },
+        {
+            "type": "promptString",
+            "id": "versaopacote",
+            "description": "Informe a versão do pacote que deve ser aplicado. Ex.: V001",
+            "default": "V001"
+        },        
+    ]
+}
